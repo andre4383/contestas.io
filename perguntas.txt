@@ -1,0 +1,14 @@
+Geografia
+Qual a capital de Pernambuco?
+Olinda
+Recife
+Caruaru
+Petrolina
+1
+Programacao
+Qual destas e uma linguagem de programacao?
+HTML
+CSS
+C
+Photoshop
+2
