@@ -116,7 +116,7 @@ void jogar() {
         scanf("%d", &resposta);
         time_t tempo_fim = time(NULL);
         
-        if (tempo_fim - tempo_inicio > 15) {
+        if (tempo_fim - tempo_inicio > 15) { //tempo limite de 15 segundos para responder
             printf(">>> TEMPO ESGOTADO! Demorou %d segundos. Perdeu a vez.\n", (int)(tempo_fim - tempo_inicio));
             multiplicador = 1; // Zera o combo se demorar muito
             continue; // Pula para a próxima pergunta
