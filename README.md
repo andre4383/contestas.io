@@ -1,9 +1,9 @@
-# 🏆 Contestas.io
+#  Contestas.io
 > **Quiz Interativo via Terminal em C — Arquitetura e Fluxo do Sistema**
 
 ---
 
-## 💡 1. O Conceito Pedagógico
+##  1. O Conceito Pedagógico
 
 O principal objetivo do projeto é a **separação estrita entre Dados (Persistência) e Lógica (Código)**.
 * O jogo inicia consumindo um banco de dados de **perguntas pré-definidas** armazenadas em um arquivo `.txt`.
@@ -12,7 +12,7 @@ O principal objetivo do projeto é a **separação estrita entre Dados (Persist�
 
 ---
 
-## 🏗️ 2. Arquitetura e Ciclo de Execução
+##  2. Arquitetura e Ciclo de Execução
 *(Utilize este diagrama para mostrar à banca as 3 opções do menu funcionando em paralelo)*
 
 ```mermaid
@@ -29,12 +29,12 @@ flowchart LR
     B["⚙️ Menu Principal <br> (Loop do main.c)"]:::hub
 
     %% Opções do Menu Lado a Lado
-    C["🎮 Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
-    F["📊 Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
-    G["👨‍🏫 Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
+    C[" Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
+    F[" Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
+    G[" Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
 
     %% Arquivo de Destino do Placar
-    E["🏆 ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
+    E[" ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
 
     %% Fluxo de Entrada e Ramos do Menu
     A -->|Carrega perguntas| B
