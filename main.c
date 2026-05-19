@@ -20,7 +20,7 @@ typedef struct {
 } Jogador;
 
 // RECURSIVIDADE: Uma funcao que chama a si mesma repetidas vezes ate atingir uma condicao de parada.
-void embaralhar(Pergunta *vetor, int tamanho) {
+void embaralhar(Pergunta *vetor, int tamanho) { // função embaralhar 
     if (tamanho <= 1) return; 
     
     int i = rand() % tamanho; 
@@ -116,7 +116,7 @@ void jogar() {
         scanf("%d", &resposta);
         time_t tempo_fim = time(NULL);
         
-        if (tempo_fim - tempo_inicio > 10) {
+        if (tempo_fim - tempo_inicio > 15) {
             printf(">>> TEMPO ESGOTADO! Demorou %d segundos. Perdeu a vez.\n", (int)(tempo_fim - tempo_inicio));
             multiplicador = 1; // Zera o combo se demorar muito
             continue; // Pula para a próxima pergunta
@@ -127,7 +127,7 @@ void jogar() {
                 if ((resposta - 1) == perguntas[i].correta) {
                     int pontos_ganhos = 10 * multiplicador;
                     printf(">>> CERTO! +%d pontos (Combo x%d)\n", pontos_ganhos, multiplicador);
-                    pontos += pontos_ganhos;
+                    pontos += pontos_ganhos; //calcula pontuacao
                     multiplicador++;
                 } else {
                     printf(">>> ERRADO! A correta era a numero %d\n", perguntas[i].correta + 1);
@@ -215,7 +215,7 @@ int main() {
         printf("Escolha: ");
         scanf("%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) { //menu switch case
             case 1: jogar(); break;
             case 2: ver_ranking(); break;
             case 3: modo_professor(); break;
