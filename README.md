@@ -24,24 +24,26 @@ flowchart LR
     classDef memoria fill:#e3fafc,stroke:#1098ad,stroke-width:2px;
     classDef motor fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
 
-    subgraph Armazenamento (.txt)
-        A[📄 perguntas.txt <br> Bloco de 7 linhas]:::arquivo
-        E[🏆 ranking.txt <br> Formato Nome;Pontos]:::arquivo
+    subgraph "Armazenamento (.txt)"
+        A["📄 perguntas.txt <br> Bloco de 7 linhas"]:::arquivo
+        E["🏆 ranking.txt <br> Formato Nome;Pontos"]:::arquivo
     end
 
-    subgraph Execução em Memória
-        B[🧠 RAM: malloc dinâmico <br> com cálculo de linhas / 7]:::memoria
-        C{⚙️ Motor do Jogo em C <br> Menu Principal}:::memoria
+    subgraph "Execução em Memória"
+        B["🧠 RAM: malloc dinâmico <br> (linhas / 7)"]:::memoria
+        C{"⚙️ Motor do Jogo <br> Menu Principal em C"}:::memoria
     end
 
-    subgraph Regras de Negócio de Nota Extra
-        F[⏱️ Controle de Tempo: time.h]:::motor
-        G[🔥 Combo Multiplicador ++]:::motor
-        H[🎲 Recursão: embaralhar]:::motor
+    subgraph "Regras de Negócio (Nota Extra)"
+        F["⏱️ Tempo Limite: time.h"]:::motor
+        G["🔥 Combo Multiplicador ++"]:::motor
+        H["🎲 Recursão: embaralhar"]:::motor
     end
 
-    A -->|Leitura e parser| B
-    B -->|Vetor de Structs| C
-    C -->|Validações| F & G & H
-    C -->|Grava Placar Top 10| E
-    C -.->|Modo Professor: Append| A
+    A --> B
+    B --> C
+    C --> F
+    C --> G
+    C --> H
+    C --> E
+    C -.-> A
