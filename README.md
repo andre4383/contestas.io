@@ -1,35 +1,47 @@
 # 🏆 Contestas.io
-> **Apresentação do Projeto - Hackathon**
+> **Apresentação do Projeto - Quiz Interativo via Terminal em C**
 
 ---
 
-## 💡 1. O Insight Pedagógico (O Problema vs. A Solução)
+## 💡 1. O Insight Pedagógico e os Super Bônus
 
-* **O Desafio Comum:** Em sistemas tradicionais, mudar as perguntas de um jogo exige alterar o código-fonte e compilar o programa novamente.
-* **A Nossa Solução:** **Separação total entre Dados e Lógica.** O professor pode adicionar, editar ou remover perguntas usando um arquivo de texto comum (`.txt`). O programa em C lê esses dados dinamicamente, sem precisar de nova recompilação!
+* **Separação de Dados e Lógica:** O motor do jogo em C é 100% independente do banco de dados. O professor pode gerenciar perguntas sem tocar em uma única linha de código.
+* **🚀 Entregas de Nota Extra Implementadas:**
+  * **🏷️ Categorias Dinâmicas:** Cada pergunta possui sua própria etiqueta de assunto.
+  * **⏱️ Tempo Limite Real:** Integração com a biblioteca `<time.h>` para validar respostas em até 10 segundos.
+  * **🔥 Sistema de Streak/Combo:** Multiplicador de pontos para acertos consecutivos.
+  * **👨‍🏫 Modo Professor Integrado:** Interface direta no menu para cadastrar novas perguntas em tempo de execução.
 
 ---
 
 ## 🏗️ 2. Arquitetura do Sistema e Fluxo de Dados
-*(Abra este gráfico na tela do GitHub para explicar a estrutura técnica para a banca)*
+*(Utilize este gráfico no telão para guiar a explicação técnica para a banca examinadora)*
 
 ```mermaid
-flowchart TD
-    %% Estilos visuais para a apresentação
+flowchart LR
+    %% Estilização do Diagrama
     classDef arquivo fill:#ffe3e3,stroke:#ff6b6b,stroke-width:2px;
-    classDef codigo fill:#e3fafc,stroke:#1098ad,stroke-width:2px;
-    classDef ator fill:#fff9db,stroke:#f59f00,stroke-width:2px;
+    classDef memoria fill:#e3fafc,stroke:#1098ad,stroke-width:2px;
+    classDef motor fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
 
-    A[👨‍🏫 Professor / Usuário]:::ator
-    B[📄 perguntas.txt]:::arquivo
-    C[🧠 Memória RAM <br> Vetor Dinâmico com 'malloc']:::codigo
-    D{⚙️ Motor do Jogo <br> Loop principal em C}:::codigo
-    E[🏆 ranking.txt <br> Gravação do Top 10]:::arquivo
+    subgraph Armazenamento (.txt)
+        A[📄 perguntas.txt <br> Bloco de 7 linhas]:::arquivo
+        E[🏆 ranking.txt <br> Formato Nome;Pontos]:::arquivo
+    end
 
-    %% Fluxo de Informação
-    A -->|1. Interage com o Menu| D
-    B -->|2. Leitura via 'fopen'| C
-    C -->|3. Alimenta em tempo real| D
-    D -->|4. Mistura com 'Recursão'| D
-    D -->|5. Atualiza placar| E
-    A -.->|Modo Professor: Edita direto| B
+    subgraph Execução em Memória
+        B[🧠 RAM: malloc dinâmico <br> com cálculo de linhas / 7]:::memoria
+        C{⚙️ Motor do Jogo em C <br> Menu Principal}:::memoria
+    end
+
+    subgraph Regras de Negócio de Nota Extra
+        F[⏱️ Controle de Tempo: time.h]:::motor
+        G[🔥 Combo Multiplicador ++]:::motor
+        H[🎲 Recursão: embaralhar]:::motor
+    end
+
+    A -->|Leitura e parser| B
+    B -->|Vetor de Structs| C
+    C -->|Validações| F & G & H
+    C -->|Grava Placar Top 10| E
+    C -.->|Modo Professor: Append| A
