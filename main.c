@@ -16,9 +16,10 @@ typedef struct {
 
 typedef struct {
     char nome[MAX_NOME];
-    int pontos;
+    int pontos; 
 } Jogador;
 
+// RECURSIVIDADE: Uma funcao que chama a si mesma repetidas vezes ate atingir uma condicao de parada.
 void embaralhar(Pergunta *vetor, int tamanho) {
     if (tamanho <= 1) return; 
     
@@ -28,6 +29,7 @@ void embaralhar(Pergunta *vetor, int tamanho) {
     vetor[tamanho - 1] = vetor[i];
     vetor[i] = temp;
     
+    // Chamada Recursiva: A funcao chama a si mesma passando o vetor com um tamanho menor (-1), deixando a ultima carta (ja embaralhada) quieta.
     embaralhar(vetor, tamanho - 1);
 }
 
@@ -81,6 +83,8 @@ void jogar() {
     
     rewind(f);
 
+    // MALLOC (Alocacao Dinamica): O programa nao sabe quantas perguntas existem no txt de antemao.
+    // O malloc serve para pedir ao computador exatamente o espaco de memoria necessario no momento em que o jogo roda.
     Pergunta *perguntas = (Pergunta*) malloc(qtd_perguntas * sizeof(Pergunta));
 
     for (int i = 0; i < qtd_perguntas; i++) {
