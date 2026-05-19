@@ -1,49 +1,40 @@
 # 🏆 Contestas.io
-> **Apresentação do Projeto - Quiz Interativo via Terminal em C**
+> **Quiz Interativo via Terminal em C — Arquitetura e Fluxo de Execução**
 
 ---
 
-## 💡 1. O Insight Pedagógico e os Super Bônus
+## 💡 1. O Conceito Pedagógico
 
-* **Separação de Dados e Lógica:** O motor do jogo em C é 100% independente do banco de dados. O professor pode gerenciar perguntas sem tocar em uma única linha de código.
-* **🚀 Entregas de Nota Extra Implementadas:**
-  * **🏷️ Categorias Dinâmicas:** Cada pergunta possui sua própria etiqueta de assunto.
-  * **⏱️ Tempo Limite Real:** Integração com a biblioteca `<time.h>` para validar respostas em até 10 segundos.
-  * **🔥 Sistema de Streak/Combo:** Multiplicador de pontos para acertos consecutivos.
-  * **👨‍🏫 Modo Professor Integrado:** Interface direta no menu para cadastrar novas perguntas em tempo de execução.
+O objetivo principal do projeto é a **separação estrita entre Dados (Persistência) e Lógica (Código)**. 
+* O arquivo `perguntas.txt` funciona como um banco de dados independente.
+* O motor em C consome, processa e gerencia esses dados em memória dinâmica, permitindo atualizações em tempo real sem a necessidade de recompilar o executável.
 
 ---
 
-## 🏗️ 2. Arquitetura do Sistema e Fluxo de Dados
-*(Utilize este gráfico no telão para guiar a explicação técnica para a banca examinadora)*
+## 🏗️ 2. Ciclo de Vida dos Dados e Fluxo do Programa
+*(Utilize este diagrama linear para mostrar à banca exatamente como os dados entram, são processados e persistem)*
 
 ```mermaid
-flowchart LR
-    %% Estilização do Diagrama
-    classDef arquivo fill:#ffe3e3,stroke:#ff6b6b,stroke-width:2px;
-    classDef memoria fill:#e3fafc,stroke:#1098ad,stroke-width:2px;
-    classDef motor fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+flowchart TD
+    %% Customização de Estilos (Clean e Profissional)
+    classDef arquivo fill:#fff5f5,stroke:#ffc9c9,stroke-width:2px;
+    classDef memoria fill:#e6f7ff,stroke:#bae7ff,stroke-width:2px;
+    classDef loop fill:#f6ffed,stroke:#d9f7be,stroke-width:2px;
 
-    subgraph "Armazenamento (.txt)"
-        A["📄 perguntas.txt <br> Bloco de 7 linhas"]:::arquivo
-        E["🏆 ranking.txt <br> Formato Nome;Pontos"]:::arquivo
-    end
+    %% Elementos
+    A["📄 perguntas.txt <br> (Leitura dos blocos de 7 linhas)"]:::arquivo
+    B["🧠 Alocação Dinâmica <br> (malloc calculado via RAM)"]:::memoria
+    C["🎲 Pré-Jogo <br> (Função Recursiva: Embaralhar)"]:::loop
+    D["⚙️ Loop Principal do Jogo <br> (Mecânicas: ⏱️ Tempo Limite 10s | 🔥 Multiplicador Combo)"]:::loop
+    E["🏆 ranking.txt <br> (Persistência do Top 10 Ordenado)"]:::arquivo
+    
+    F["👨‍🏫 Interface: Modo Professor <br> (Inserção de novas questões)"]:::memoria
 
-    subgraph "Execução em Memória"
-        B["🧠 RAM: malloc dinâmico <br> (linhas / 7)"]:::memoria
-        C{"⚙️ Motor do Jogo <br> Menu Principal em C"}:::memoria
-    end
+    %% Conexões do Fluxo Principal
+    A -->|1. fopen 'r'| B
+    B -->|2. Vetor de Structs| C
+    C -->|3. Dados Misturados| D
+    D -->|4. Gravação via fscanf/fprintf| E
 
-    subgraph "Regras de Negócio (Nota Extra)"
-        F["⏱️ Tempo Limite: time.h"]:::motor
-        G["🔥 Combo Multiplicador ++"]:::motor
-        H["🎲 Recursão: embaralhar"]:::motor
-    end
-
-    A --> B
-    B --> C
-    C --> F
-    C --> G
-    C --> H
-    C --> E
-    C -.-> A
+    %% Conexão do Modo Professor
+    F -->|Modo Append 'a'| A
