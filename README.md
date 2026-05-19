@@ -13,38 +13,36 @@ O principal objetivo do projeto é a **separação estrita entre Dados (Persist�
 ---
 
 ## 🏗️ 2. Arquitetura e Ciclo de Execução
-*(Utilize este diagrama para mostrar à banca o caminho exato que os dados fazem durante o uso do programa)*
+*(Utilize este diagrama para mostrar à banca as 3 opções do menu funcionando em paralelo)*
 
 ```mermaid
-flowchart TD
-    %% Customização de Estilos (Clean e Seguro para o GitHub)
+flowchart LR
+    %% Customização de Estilos
     classDef arquivo fill:#fff5f5,stroke:#ffc9c9,stroke-width:2px;
     classDef hub fill:#e6f7ff,stroke:#bae7ff,stroke-width:2px;
     classDef fluxo fill:#f6ffed,stroke:#d9f7be,stroke-width:2px;
 
-    %% Nós do Sistema
+    %% Base de Dados Inicial
     A["📄 perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
+
+    %% Menu Central
     B["⚙️ Menu Principal <br> (Loop do main.c)"]:::hub
-    
-    C["🎮 Opção 1: Jogar"]:::fluxo
-    D["🧠 Alocação RAM <br> (malloc + embaralhar)"]:::hub
-    E["🏆 ranking.txt <br> (Atualizado após cada rodada)"]:::arquivo
-    
-    F["📊 Opção 2: Ver Ranking"]:::fluxo
-    G["👨‍🏫 Opção 3: Modo Professor"]:::fluxo
 
-    %% Conexões do Fluxo
-    B --> C
-    B --> F
-    B --> G
+    %% Opções do Menu Lado a Lado
+    C["🎮 Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
+    F["📊 Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
+    G["👨‍🏫 Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
 
-    %% Execução do Jogo
-    A -->|1. Carrega dados| C
-    C --> D
-    D -->|2. Grava Top 10 imediato| E
-    
-    %% Visualização do Ranking
-    F -->|Lê placar| E
-    
-    %% Expansão pelo Professor
-    G -->|3. Opcional: Adiciona novas perguntas| A
+    %% Arquivo de Destino do Placar
+    E["🏆 ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
+
+    %% Fluxo de Entrada e Ramos do Menu
+    A -->|Carrega perguntas| B
+    B ---> C
+    B ---> F
+    B ---> G
+
+    %% Conexões Finais de Cada Funcionalidade
+    C -->|Grava placar imediato| E
+    F -.->|Apenas lê dados| E
+    G -->|Modo Append| A
