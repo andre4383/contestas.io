@@ -4,12 +4,12 @@
 ---
 
 ## Integrantes da Equipe
-* **[Afonso Araújo]** — ahma@cesar.school
-* **[André Montenegro]** — agmos@cesa.school
-* **[Breno Gabriel]** — bgas@cesar.school
-* **[Lucas Gabriel]** — lgcs2@cesar.school
-* **[Rafael Viana]** — rlvs@cesar.school
-* **[José Williams]** — jwlp@cesar.school
+* **Afonso Araújo** — ahma@cesar.school
+* **André Montenegro** — agmos@cesa.school
+* **Breno Gabriel** — bgas@cesar.school
+* **Lucas Gabriel** — lgcs2@cesar.school
+* **Rafael Viana** — rlvs@cesar.school
+* **José Williams** — jwlp@cesar.school
 
 ---
 
@@ -22,7 +22,7 @@ O software inicia consumindo um banco de dados de **perguntas pré-definidas** a
 ---
 
 ## Arquitetura e Ciclo de Execução
-*O diagrama abaixo ilustra as 3 opções do menu do sistema funcionando em paralelo e suas interações com os arquivos de persistência:*
+*O diagrama abaixo ilustra as 4 opções do menu do sistema funcionando em paralelo e suas interações com os arquivos de persistência:*
 
 ```mermaid
 flowchart LR
@@ -30,6 +30,7 @@ flowchart LR
     classDef arquivo fill:#fff5f5,stroke:#ffc9c9,stroke-width:2px;
     classDef hub fill:#e6f7ff,stroke:#bae7ff,stroke-width:2px;
     classDef fluxo fill:#f6ffed,stroke:#d9f7be,stroke-width:2px;
+    classDef encerramento fill:#fafafa,stroke:#d9d9d9,stroke-width:2px;
 
     %% Base de Dados Inicial
     A["perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
@@ -41,6 +42,7 @@ flowchart LR
     C["Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
     F["Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
     G["Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
+    H["Opção 4: Sair <br> (Encerra o Programa)"]:::encerramento
 
     %% Arquivo de Destino do Placar
     E["ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
@@ -50,6 +52,7 @@ flowchart LR
     B ---> C
     B ---> F
     B ---> G
+    B ---> H
 
     %% Conexões Finais de Cada Funcionalidade
     C -->|Grava placar imediato| E
