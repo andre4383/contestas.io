@@ -1,19 +1,28 @@
-#  Contestas.io
+# Contestas.io
 > **Quiz Interativo via Terminal em C — Arquitetura e Fluxo do Sistema**
 
 ---
 
-##  1. O Conceito Pedagógico
-
-O principal objetivo do projeto é a **separação estrita entre Dados (Persistência) e Lógica (Código)**.
-* O jogo inicia consumindo um banco de dados de **perguntas pré-definidas** armazenadas em um arquivo `.txt`.
-* O motor em C processa essas informações dinamicamente a cada partida.
-* O sistema permite evolução contínua através do cadastro opcional de novas perguntas e da atualização instantânea do ranking de jogadores.
+## Integrantes da Equipe
+* **[Afonso Araújo]** — ahma@cesar.school
+* **[André Montenegro]** — agmos@cesa.school
+* **[Breno Gabriel]** — bgas@cesar.school
+* **[Lucas Gabriel]** — lgcs2@cesar.school
+* **[Rafael Viana]** — rlvs@cesar.school
+* **[José Williams]** — jwlp@cesar.school
 
 ---
 
-##  2. Arquitetura e Ciclo de Execução
-*(Utilize este diagrama para mostrar à banca as 3 opções do menu funcionando em paralelo)*
+## Descrição do Tema
+
+O **Contestas.io** é um mini quiz interativo desenvolvido na linguagem C (estilo Kahoot!) que roda diretamente no console. O principal objetivo pedagógico e técnico do projeto é a **separação estrita entre Dados (Persistência) e Lógica (Código)**.
+
+O software inicia consumindo um banco de dados de **perguntas pré-definidas** armazenadas em um arquivo `.txt`. O motor do jogo processa essas informações dinamicamente a cada partida, o que permite que novos desafios sejam incluídos de forma assíncrona — seja editando o arquivo de texto diretamente ou através de um módulo administrativo interno —, atualizando a experiência em tempo real sem a necessidade de recompilar o código-fonte.
+
+---
+
+## Arquitetura e Ciclo de Execução
+*O diagrama abaixo ilustra as 3 opções do menu do sistema funcionando em paralelo e suas interações com os arquivos de persistência:*
 
 ```mermaid
 flowchart LR
@@ -23,18 +32,18 @@ flowchart LR
     classDef fluxo fill:#f6ffed,stroke:#d9f7be,stroke-width:2px;
 
     %% Base de Dados Inicial
-    A[" perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
+    A["perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
 
     %% Menu Central
-    B[" Menu Principal <br> (Loop do main.c)"]:::hub
+    B["Menu Principal <br> (Loop do main.c)"]:::hub
 
     %% Opções do Menu Lado a Lado
-    C[" Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
-    F[" Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
-    G[" Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
+    C["Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
+    F["Opção 2: Ver Ranking <br> (Exibe o Top 10)"]:::fluxo
+    G["Opção 3: Modo Professor <br> (Insere novas questões)"]:::fluxo
 
     %% Arquivo de Destino do Placar
-    E[" ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
+    E["ranking.txt <br> (Salvo após cada rodada)"]:::arquivo
 
     %% Fluxo de Entrada e Ramos do Menu
     A -->|Carrega perguntas| B
