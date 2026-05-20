@@ -23,10 +23,10 @@ flowchart LR
     classDef fluxo fill:#f6ffed,stroke:#d9f7be,stroke-width:2px;
 
     %% Base de Dados Inicial
-    A["📄 perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
+    A[" perguntas.txt <br> (Perguntas Pré-definidas)"]:::arquivo
 
     %% Menu Central
-    B["⚙️ Menu Principal <br> (Loop do main.c)"]:::hub
+    B[" Menu Principal <br> (Loop do main.c)"]:::hub
 
     %% Opções do Menu Lado a Lado
     C[" Opção 1: Jogar <br> (Alocação RAM + Embaralhar)"]:::fluxo
